@@ -9,7 +9,7 @@ I did my best to complete this assignment . Winthin the given time period.
 
 PROCEDURE..... 
 		
-step 1 > i read all the url's from csv file 
+step 1 > Read all the url's from csv file 
 	 with the help of for loop
 	 
 step 2 > modified url's with given data and .format function of python 
@@ -18,7 +18,7 @@ step 3 > check each and every URL , is it working or Not
 
 		if its not working then directly add it to dictionary and append to list.
 		
-		if its working performed all the given below steps 
+		if its working performed all the steps given below  
 		
 step 4 > Extracted Product Title with the help of css elements
 
@@ -30,7 +30,7 @@ step 7 > Extracted product details from the web page
 
 step 8 > Saved data in dictionary 
 
-step 9 > Append data to the list
+step 9 > Append data to the list from dictionary
 
 step 10> Repeated same steps 100 times
 
@@ -43,5 +43,5 @@ step 12> dump data into json file.
 
 Feedback 
 
-	took 2 minute 5 seconds to scrap 100 urls
+	took 2 minute 10 seconds to scrap 100 urls
 
