@@ -1,9 +1,9 @@
 from selenium import webdriver
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import csv
 from datetime import date
 import pandas as pd
-
-#  Extracting all the information like artcile heading , links , author, date based on articles id 
 
 def InfoFinder(id, ID):
         Id = ID
@@ -40,29 +40,41 @@ def InfoFinder(id, ID):
         data = [Id, Headline, Link, Author, DateTime]
         VergeData.append(data)
 
-# Extracting all the possibe articles on the web page and calling another function (InfoFinder)
-
 def FindId(soup, ID):
     ids = soup.find_all('div', {'class':'duet--content-cards--content-card'})
     for id in ids:
         ID = ID + 1
+        # if 'data-chorus-optimize-id' in id.attrs:
+        #     prime = id.attrs['data-chorus-optimize-id']
         InfoFinder(id, ID)
 
-# Calling Url and Function (FindId)
-
+#driver.find_element_by_class_name('c-pagination__more').click()
 VergeData = []
 ID = 0
 url = "https://www.theverge.com/"
 driver = webdriver.Firefox()
+#html = urlopen(url)
 driver.get(url)
 html = driver.page_source
+#bs = BeautifulSoup(html.read(), 'html.parser')
 soup = BeautifulSoup(html, 'html.parser')
 FindId(soup, ID)
 
-# writing data to a csv file with a name based on current date
+# Creating a csv file
 
 Today = str(date.today())
+
 df = pd.DataFrame(VergeData, columns=['ID', 'Headline', 'Link', 'Author', 'DateTime'])
 df.to_csv(Today+'.csv')
 
+# f = open(Today+".csv", "wb")
+# csv_writer = csv.writer(f)
+# for i in VergeData:
+#     csv_writer.writerow(i.encode())
+# f.close()
 
+# with open(Today+".csv", 'wb') as file:
+#     writer = csv.writer(file)
+#     for row in VergeData:
+#         writer.writerow(row)
+#     file.close()
